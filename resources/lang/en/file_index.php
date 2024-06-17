@@ -1,0 +1,23 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are used during authentication for various
+    | messages that we need to display to the user. You are free to modify
+    | these language lines according to your application's requirements.
+    |
+    */
+
+    'file_list'=>'Text Books and Other Files List',
+    'upload_file'=>'Upload New File',
+    'no'=>'no',
+    'subject'=>'Subject',
+    'file_name'=>'File Name',
+    'total_assign_users'=>'Total Assign Users',
+    'assign'=>'Assign',
+];
