@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use NotificationChannels\WebPush\HasPushSubscriptions;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes, HasPushSubscriptions;
+    use HasFactory, Notifiable, SoftDeletes;
 
     const ADMIN = 1;
     const TEACHER = 2;
@@ -52,7 +51,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getNameAttribute(){
+    public function getNameAttribute()
+    {
         return "$this->f_name $this->l_name";
     }
 
