@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import firebase from "firebase/app";
 import "firebase/firestore";
 
 const config = {
@@ -7,8 +7,8 @@ const config = {
     databaseURL: process.env.MIX_FIREBASE_DATABASE_URL,
     projectId: process.env.MIX_FIREBASE_PROJECT_ID,
     storageBucket: process.env.MIX_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: "694488500848",
-    appId: process.env.MIX_FIREBASE_APP_ID
+    messagingSenderId: "400065587899",
+    appId: process.env.MIX_FIREBASE_APP_ID,
 };
 firebase.initializeApp(config);
 
