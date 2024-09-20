@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return redirect('login');
@@ -24,13 +24,13 @@ Route::get('/login/{locale}', function ($locale) {
     return view('auth/login');
 });
 
-Route::get('/tnc/student', function(){
-    $tnc = TermsAndCondition::where('role',2)->first();
+Route::get('/tnc/student', function () {
+    $tnc = TermsAndCondition::where('role', 2)->first();
     return view('tnc')->with(['tnc' => $tnc]);
 });
 
-Route::get('/tnc/teacher', function(){
-    $tnc = TermsAndCondition::where('role',1)->first();
+Route::get('/tnc/teacher', function () {
+    $tnc = TermsAndCondition::where('role', 1)->first();
     return view('tnc')->with(['tnc' => $tnc]);
 });
 
@@ -52,7 +52,6 @@ Route::get('manifest.json', function () {
     ];
 });
 
-
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
@@ -61,21 +60,25 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::get('/lang/{locale?}', [\App\Http\Controllers\LocalizationController::class, 'index'])->name('lang');
 
-    Route::get('/settings', [\App\Http\Controllers\SettingController::class, 'index'] )->name('settings');
+    Route::get('/test-locale', function () {
+        return App::getLocale(); // This should return the current locale
+    });
+
+    Route::get('/settings', [\App\Http\Controllers\SettingController::class, 'index'])->name('settings');
     Route::post('/settings/store', [\App\Http\Controllers\SettingController::class, 'store'])->name('settings.store');
 
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::get('/get-events',[\App\Http\Controllers\LessonReservationController::class,'index'])
-    ->name('lessonrv.list');
-    Route::get('/event/{lessonReservation}/detail',[\App\Http\Controllers\LessonReservationController::class,'show'])
-    ->name('lessonrv.show');
-    Route::get('/event/{lessonReservation}/edit',[\App\Http\Controllers\LessonReservationController::class,'edit'])
-    ->name('lessonrv.edit');
-    Route::post('/event/{lessonReservation}/update',[\App\Http\Controllers\LessonReservationController::class,'update'])
-    ->name('lessonrv.update');
-    Route::delete('/event/{lessonReservation}/delete',[\App\Http\Controllers\LessonReservationController::class,'destroy'])
-    ->name('lessonrv.delete');
+    Route::get('/get-events', [\App\Http\Controllers\LessonReservationController::class, 'index'])
+        ->name('lessonrv.list');
+    Route::get('/event/{lessonReservation}/detail', [\App\Http\Controllers\LessonReservationController::class, 'show'])
+        ->name('lessonrv.show');
+    Route::get('/event/{lessonReservation}/edit', [\App\Http\Controllers\LessonReservationController::class, 'edit'])
+        ->name('lessonrv.edit');
+    Route::post('/event/{lessonReservation}/update', [\App\Http\Controllers\LessonReservationController::class, 'update'])
+        ->name('lessonrv.update');
+    Route::delete('/event/{lessonReservation}/delete', [\App\Http\Controllers\LessonReservationController::class, 'destroy'])
+        ->name('lessonrv.delete');
 
     Route::get('/levels', [\App\Http\Controllers\LevelController::class, 'index'])->name('levels.list');
     Route::get('/levels/new', [\App\Http\Controllers\LevelController::class, 'create'])->name('levels.create');
@@ -92,7 +95,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/subjects/{subject}/delete', [\App\Http\Controllers\SubjectController::class, 'destroy'])->name('subjects.delete');
 
     Route::get('/chats', [\App\Http\Controllers\ChatController::class, 'index'])->name('chats');
-    Route::post('/chat/sendnoti', [\App\Http\Controllers\ChatController::class,'sendNoti']);
+    Route::post('/chat/sendnoti', [\App\Http\Controllers\ChatController::class, 'sendNoti']);
 
     Route::get('/terms-and-conditions', [\App\Http\Controllers\TermsandconditionsController::class, 'index'])->name('terms-and-conditions');
     Route::post('/terms-and-conditions-update', [\App\Http\Controllers\TermsandconditionsController::class, 'create'])->name('terms-and-conditions-update');
@@ -119,7 +122,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/teacher/paymentSearch', [\App\Http\Controllers\TeacherController::class, 'paymentSearch'])->name('teachers.paymentSearch');
     Route::get('/teacher/{id}/student', [\App\Http\Controllers\TeacherController::class, 'student'])->name('teachers.student');
     Route::get('/teacher/{id}/files', [\App\Http\Controllers\TeacherController::class, 'files'])->name('teachers.files');
-    Route::post('/teacher/{teacher}/mark-absent', [\App\Http\Controllers\TeacherController::class,'markAbsent'])->name('teachers.mark_absent');
+    Route::post('/teacher/{teacher}/mark-absent', [\App\Http\Controllers\TeacherController::class, 'markAbsent'])->name('teachers.mark_absent');
 
     Route::get('/mfiles', [\App\Http\Controllers\FileController::class, 'index'])->name('files.list');
     Route::get('/mfiles/new', [\App\Http\Controllers\FileController::class, 'create'])->name('files.create');
@@ -138,13 +141,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/packages/{package}/delete', [\App\Http\Controllers\PackageController::class, 'destroy'])->name('packages.delete');
 
     //Only For Teachers
-    Route::get('/assignments',[\App\Http\Controllers\AssignmentController::class, 'index'])->name('assignments.list');
-    Route::get('/assignments/{lessonReservation}/create',[\App\Http\Controllers\AssignmentController::class, 'create'])->name('assignment.create');
-    Route::post('/assignments/store',[\App\Http\Controllers\AssignmentController::class, 'store'])->name('assignment.store');
-    Route::get('/assignments/{assignment}/show',[\App\Http\Controllers\AssignmentController::class,'show'])->name('assignment.detail');
+    Route::get('/assignments', [\App\Http\Controllers\AssignmentController::class, 'index'])->name('assignments.list');
+    Route::get('/assignments/{lessonReservation}/create', [\App\Http\Controllers\AssignmentController::class, 'create'])->name('assignment.create');
+    Route::post('/assignments/store', [\App\Http\Controllers\AssignmentController::class, 'store'])->name('assignment.store');
+    Route::get('/assignments/{assignment}/show', [\App\Http\Controllers\AssignmentController::class, 'show'])->name('assignment.detail');
 
-    Route::post('/answers/{answer}/feedback',[\App\Http\Controllers\AnswerController::class, 'update'])->name('answer.feedback');
-   //All Payments
+    Route::post('/answers/{answer}/feedback', [\App\Http\Controllers\AnswerController::class, 'update'])->name('answer.feedback');
+    //All Payments
     Route::get('/payments', [\App\Http\Controllers\PaymentController::class, 'index'])->name('payments.list');
     Route::get('/payment/{payment}/show', [\App\Http\Controllers\PaymentController::class, 'show'])->name('payments.show');
     Route::post('/payment/searchPayments', [\App\Http\Controllers\PaymentController::class, 'searchPayments'])->name('payments.searchPayments');
@@ -154,22 +157,22 @@ Route::group(['middleware' => 'auth'], function () {
     /**
      * Only For Studnets
      */
-    Route::group(['middleware' => 'auth','prefix'=>'student'], function () {
-        Route::get('/reports', [\App\Http\Controllers\StudentController::class,'lessonProgressReport'])->name('student.reports');
-        Route::get('/assignments',[\App\Http\Controllers\AssignmentController::class, 'studentAssignments'])->name('student.assignments.list');
+    Route::group(['middleware' => 'auth', 'prefix' => 'student'], function () {
+        Route::get('/reports', [\App\Http\Controllers\StudentController::class, 'lessonProgressReport'])->name('student.reports');
+        Route::get('/assignments', [\App\Http\Controllers\AssignmentController::class, 'studentAssignments'])->name('student.assignments.list');
         Route::get('/lecturers', [\App\Http\Controllers\TeacherController::class, 'list'])->name('student.teachers.list');
         Route::get('/lecturer/{id}', [\App\Http\Controllers\TeacherController::class, 'stuDetail'])->name('student.teachers.detail');
         Route::get('/booking/{id}/{date}/{time}', [\App\Http\Controllers\LessonReservationController::class, 'create'])->name('student.booking.preview');
         Route::post('/make-booking', [\App\Http\Controllers\LessonReservationController::class, 'store'])->name('student.booking.store');
 
-        Route::post('/answer/submit',[\App\Http\Controllers\AnswerController::class, 'store'])->name('student.answer.submit');
+        Route::post('/answer/submit', [\App\Http\Controllers\AnswerController::class, 'store'])->name('student.answer.submit');
 
-        Route::get('/packages',[\App\Http\Controllers\PackageController::class, 'stuPackageList'])->name('student.packages.list');
-        Route::get('/package/{package}/buy',[\App\Http\Controllers\PackageController::class, 'buyPackage'])->name('student.package.buy');
-        Route::get('/package/history', [\App\Http\Controllers\PackageController::class,'history'])->name('studnet.package.history');
-        Route::post('/package/confirm', [\App\Http\Controllers\PackageController::class,'makePurchase'])->name('student.package.makePurchase');
-        Route::get('/courses',[\App\Http\Controllers\SubjectController::class,'list'])->name('student.course.list');
-        Route::get('/course/{subject}',[\App\Http\Controllers\SubjectController::class,'show'])->name('student.course.show');
-        Route::get('/dashboard',[\App\Http\Controllers\StudentController::class,'dashboard'])->name('student.dashboard');
+        Route::get('/packages', [\App\Http\Controllers\PackageController::class, 'stuPackageList'])->name('student.packages.list');
+        Route::get('/package/{package}/buy', [\App\Http\Controllers\PackageController::class, 'buyPackage'])->name('student.package.buy');
+        Route::get('/package/history', [\App\Http\Controllers\PackageController::class, 'history'])->name('studnet.package.history');
+        Route::post('/package/confirm', [\App\Http\Controllers\PackageController::class, 'makePurchase'])->name('student.package.makePurchase');
+        Route::get('/courses', [\App\Http\Controllers\SubjectController::class, 'list'])->name('student.course.list');
+        Route::get('/course/{subject}', [\App\Http\Controllers\SubjectController::class, 'show'])->name('student.course.show');
+        Route::get('/dashboard', [\App\Http\Controllers\StudentController::class, 'dashboard'])->name('student.dashboard');
     });
 });
