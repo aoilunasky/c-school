@@ -60,10 +60,6 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::get('/lang/{locale?}', [\App\Http\Controllers\LocalizationController::class, 'index'])->name('lang');
 
-    Route::get('/test-locale', function () {
-        return App::getLocale(); // This should return the current locale
-    });
-
     Route::get('/settings', [\App\Http\Controllers\SettingController::class, 'index'])->name('settings');
     Route::post('/settings/store', [\App\Http\Controllers\SettingController::class, 'store'])->name('settings.store');
 
