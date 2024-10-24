@@ -31,8 +31,8 @@
                       <td>{{$reservation->start_time}}</td>
                       <td>{{$reservation->end_time}}</td>
                       @if($reservation->teacher->job_type == 1)
-                      <td>{{$reservation->teacher->salary_rate * ((strtotime($reservation->end_time)-strtotime($reservation->start_time))/3600)}}</td>
-                      @else
+                      </td>
+                      @else<td>{{$reservation->teacher->salary_rate * ((strtotime($reservation->end_time)-strtotime($reservation->start_time))/3600)}}
                       <td>25000</td>
                       @endif
                       <td>{{$reservation->student->user->name}}</td>
