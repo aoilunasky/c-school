@@ -30,7 +30,7 @@ class Teacher extends Model
         'zoom_link',
         'nrc',
         'passport',
-        'absence_count'
+        'absence_count',
     ];
 
     public function user()
@@ -67,10 +67,11 @@ class Teacher extends Model
     {
         return $this->hasMany(LessonReservation::class);
     }
-    public function getJobTypeNameAttribute(){
-        if($this->job_type == self::PART_TIME){
+    public function getJobTypeNameAttribute()
+    {
+        if ($this->job_type == self::PART_TIME) {
             return "Part Time";
-        }else if($this->job_type == self::FULL_TIME){
+        } else if ($this->job_type == self::FULL_TIME) {
             return "Full Time";
         }
     }

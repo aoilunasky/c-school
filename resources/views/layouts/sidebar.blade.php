@@ -202,7 +202,7 @@
                         </svg>
                         Japan</label>
                 </a>
-                <a class="dropdown-item" href="{{ route('lang', 'en') }}"><label>
+                <a class="dropdown-item" href="{{ route('lang','en') }}"><label>
                         <svg class="c-icon">
                             <use xlink:href="{{ asset('template/vendors/@coreui/icons/svg/flag.svg#cif-gb') }}">
                             </use>

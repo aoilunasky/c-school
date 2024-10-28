@@ -48,5 +48,6 @@ class DatabaseSeeder extends Seeder
             $studnet->save();
         });
         $this->call(AvailableScheduleSeeder::class);
+        $this->call(LessonReservationSeeder::class);
     }
 }

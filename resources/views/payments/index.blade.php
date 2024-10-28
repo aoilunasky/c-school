@@ -53,13 +53,14 @@
                         <td>{{$payment->teacher->user->name}}</td>
                         <td>{{Config::get('constants.job_type.'.$payment->teacher->job_type)}}</td>
                         @if($payment->teacher->job_type == 1)
-                        <td>{{$payment->teacher->salary_rate}} USD / hr</td>
+                        <td>{{$payment->teacher->salary_rate}} Yen / hr</td>
                         @else
-                        <td>{{$payment->teacher->salary_rate}} USD / month</td>
+                        <td>{{$payment->teacher->salary_rate}} Yen / month</td>
                         @endif
                         <td>{{$payment->date}}</td>
                         <td>{{$payment->total_hour}}</td>
-                        <td>{{$payment->amount}} USD</td>                        
+                        <td>{{$payment->amount}} Yen
+                        </td>
                         <td>
                         <!-- <a class="btn btn-success" href="{{route('payments.show',$payment->id)}}">{{ __('payments_index.detail') }}</a>                         -->
                         <a class="btn btn-success" href="{{route('payments.generatePDF',$payment->id)}}">{{ __('payments_index.pdf') }}</a>
